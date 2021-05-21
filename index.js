@@ -46,15 +46,24 @@ app.route("/articles")
 	});
 
 app.route("/articles/:articleTitle")
-    .get(function (req, res) {
-        Article.findOne({ title: req.params.articleTitle }, function (err, doc) {
-            if (!err) {
-                res.send(doc);
-            } else {
-                res.send(err);
-            }
-        });
-    })
+	.get(function (req, res) {
+		Article.findOne({ title: req.params.articleTitle }, function (err, doc) {
+			if (!err) {
+				res.send(doc);
+			} else {
+				res.send(err);
+			}
+		});
+	})
+	.put(function (req, res) {
+		Article.replaceOne({ title: req.params.articleTitle }, { title: req.body.title, content: req.body.content }, function (err) {
+			if (!err) {
+				res.send("Successfully updated document.");
+			} else {
+				res.send(err);
+			}
+		});
+	})
 
 app.listen(3000, function () {
 	console.log(`Server started on port 3000.`);
