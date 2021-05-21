@@ -18,7 +18,7 @@ const Article = mongoose.model("Article", articleSchema);
 
 app.get("/articles", function (req, res) {
 	Article.find({}, function (err, docs) {
-		console.log(docs);
+		res.send(docs);
 	}).catch((err) => console.error(err));
 });
 
