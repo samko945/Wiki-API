@@ -64,6 +64,15 @@ app.route("/articles/:articleTitle")
 			}
 		});
 	})
+	.patch(function (req, res) {
+		Article.updateOne({ title: req.params.articleTitle }, { content: req.body.content }, function (err) {
+			if (!err) {
+				res.send("Successfully updated values in the document.");
+			} else {
+				res.send(err);
+			}
+		});
+	})
 
 app.listen(3000, function () {
 	console.log(`Server started on port 3000.`);
